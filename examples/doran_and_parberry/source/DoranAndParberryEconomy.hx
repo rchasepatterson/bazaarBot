@@ -7,11 +7,11 @@ import bazaarbot.Economy;
 import bazaarbot.Market;
 import bazaarbot.MarketData;
 import haxe.Json;
-import jobs.LogicBlacksmith;
-import jobs.LogicFarmer;
-import jobs.LogicMiner;
-import jobs.LogicRefiner;
-import jobs.LogicWoodcutter;
+import jobs.LogicInsurer;
+import jobs.LogicConsumer;
+import jobs.LogicMegahospital;
+import jobs.LogicPrivatehospital;
+import jobs.LogicClinic;
 import openfl.Assets;
 
 /**
@@ -84,11 +84,11 @@ class DoranAndParberryEconomy extends Economy
 	 */
 	public function getAgentClassThatMakesMost(good:String):String
 	{
-		return if (good == "food" ) {"farmer";      }
-		  else if (good == "wood" ) {"woodcutter";  }
-		  else if (good == "ore"  ) {"miner";       }
-		  else if (good == "metal") {"refiner";     }
-		  else if (good == "tools") { "blacksmith"; }
+		return if (good == "sickness" ) {"consumer";        }
+		  else if (good == "healths"  ) {"clinic";          }
+		  else if (good == "healthl"  ) {"megahospital";    }
+		  else if (good == "healthm"  ) {"privatehospital"; }
+		  else if (good == "insurance") {"insurer";         }
 		  else "";
 	}
 
@@ -102,11 +102,11 @@ class DoranAndParberryEconomy extends Economy
 	{
 		switch(str)
 		{
-			case "blacksmith": return new LogicBlacksmith(null);
-			case "farmer": return new LogicFarmer(null);
-			case "miner": return new LogicMiner(null);
-			case "refiner": return new LogicRefiner(null);
-			case "woodcutter": return new LogicWoodcutter(null);
+			case "insurer": return new LogicInsurer(null);
+			case "consumer": return new LogicConsumer(null);
+			case "megahospital": return new LogicMegahospital(null);
+			case "privatehospital": return new LogicPrivatehospital(null);
+			case "clinic": return new LogicClinic(null);
 		}
 		return null;
 	}

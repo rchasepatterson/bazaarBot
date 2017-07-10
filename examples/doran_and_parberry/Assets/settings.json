@@ -1,70 +1,70 @@
 {
 	"start_conditions":{
 		"agents":{
-			"farmer":50,
-			"woodcutter":3,
-			"miner":1,
-			"refiner":2,
-			"blacksmith":5
+			"consumer":2000,
+			"megahospital":5,
+			"clinic":10,
+			"privatehospital":7,
+			"insurer":6
 		}
 	},
 	"goods":[
-		{"id":"food" ,"size":"1.0"},
-		{"id":"wood" ,"size":"1.0"},
-		{"id":"ore"  ,"size":"1.0"},
-		{"id":"metal","size":"1.0"},
-		{"id":"tools","size":"1.0"}
+		{"id":"sickness" ,"size":"2.0"},
+		{"id":"insurance" ,"size":"1.0"},
+		{"id":"healths"  ,"size":"1.0"},
+		{"id":"healthm","size":"1.0"},
+		{"id":"healthl","size":"1.0"}
 	],
 	"agents":[
 		{
-			"id":"farmer",
+			"id":"consumer",
 			"money":100,
 			"inventory":{
-				"start":{"food":0,"tools":1,"wood":0},
-				"ideal":{"food":0,"tools":1,"wood":3},
+				"start":{"sickness":0,"insurance":0,"healths":0,"healthm":0,"healthl":0},
+				"ideal":{"sickness":0,"insurance":1,"healths":1,"healthm":1,"healthl":1},
 				"max_size":20
 			},
-			"logic":"farmer"
+			"logic":"consumer"
 		},
 		{
-			"id":"miner",
-			"money":100,
+			"id":"megahospital",
+			"money":300,
 			"inventory":{
-				"start":{"food":1,"tools":1,"ore":0},
-				"ideal":{"food":3,"tools":1,"ore":0},
-				"max_size":20
+				"start":{"sickness":0,"healthl":15,"insurance":0},
+				"ideal":{"sickness":15,"healthl":0,"insurance":13},
+				"max_size":50
 			},
-			"logic":"miner"
+			"logic":"megahospital"
 		},
 		{
-			"id":"refiner",
-			"money":100,
+			"id":"privatehospital",
+			"money":200,
 			"inventory":{
-				"start":{"food":1,"tools":1,"metal":0,"ore":0},
-				"ideal":{"food":3,"tools":1,"metal":0,"ore":5},
-				"max_size":20
+				"start":{"sickness":0,"healthm":10,"insurance":0},
+				"ideal":{"sickness":10,"healthm":0,"insurance":0},
+				"max_size":40
 			},
-			"logic":"refiner"
+			"logic":"privatehospital"
 		},
 		{
-			"id":"woodcutter",
+			"id":"clinic",
 			"money":100,
 			"inventory":{
-				"start":{"food":1,"tools":1,"wood":0},
-				"ideal":{"food":3,"tools":1,"wood":0},
-				"max_size":20
+				"start":{"sickness":0,"healths":5,"insurance":0},
+				"ideal":{"sickness":5,"healths":0,"insurance":5},
+				"max_size":30
 			},
-			"logic":"woodcutter"
+			"logic":"clinic"
 		},
 		{
-			"id":"blacksmith",
+			"id":"insurer",
 			"money":100,
 			"inventory":{
-				"start":{"food":1,"tools":0,"metal":0,"ore":0},
-				"ideal":{"food":3,"tools":1,"metal":5,"ore":0},
-				"max_size":20
+				"start":{"insurance":10},
+				"ideal":{"insurance":0},
+				"max_size":50
 			},
-			"logic":"blacksmith"
+			"logic":"insurer"
 		}
 	]
 }

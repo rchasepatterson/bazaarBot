@@ -5,7 +5,7 @@ import bazaarbot.Market;
  * ...
  * @author larsiusprime
  */
-class LogicRefiner extends LogicGeneric
+class LogicPrivatehospital extends LogicGeneric
 {
 
 	public function new(?data:Dynamic)
@@ -15,7 +15,22 @@ class LogicRefiner extends LogicGeneric
 
 	override public function perform(agent:BasicAgent, market:Market)
 	{
-		var food = agent.queryInventory("food");
+		var insurance = agent.queryInventory("insurance");
+		var healthm = agent.queryInventory("healthm");
+		var money = agent.queryInventory("money");
+
+		if (money >= 50)
+		{
+			_consume(agent, "money", 15);
+			_produce(agent, "healthm", 4);
+		}
+		else
+		{
+			_consume(agent, "money", 15);
+			_produce(agent, "healths", 3);
+
+		}
+		/*var food = agent.queryInventory("food");
 		var tools = agent.queryInventory("tools");
 		var ore = agent.queryInventory("ore");
 
@@ -50,6 +65,6 @@ class LogicRefiner extends LogicGeneric
 			{
 				makeRoomFor(market, agent,"food",2);
 			}
-		}
+		}*/
 	}
 }

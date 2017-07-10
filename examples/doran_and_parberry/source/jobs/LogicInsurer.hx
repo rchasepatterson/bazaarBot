@@ -7,7 +7,7 @@ import bazaarbot.agent.Logic;
  * ...
  * @author larsiusprime
  */
-class LogicBlacksmith extends LogicGeneric
+class LogicInsurer extends LogicGeneric
 {
 
 	public function new(?data)
@@ -17,7 +17,27 @@ class LogicBlacksmith extends LogicGeneric
 
 	override public function perform(agent:BasicAgent, market:Market)
 	{
-		var food = agent.queryInventory("food");
+		var insurance = agent.queryInventory("insurance");
+
+		if (insurance >= 10)
+		{
+			// slow insurance production rates as quotas meet
+			if (agent.inventoryFull)
+			{
+				makeRoomFor(market, agent,"sickness",2);
+			}
+		}
+		else
+		{
+			_produce(agent, "insurance", 2);
+
+			/*if (!has_food && agent.inventoryFull)
+			{
+				makeRoomFor(market, agent,"food",2);
+			}*/
+		}
+
+		/*var food = agent.queryInventory("food");
 		var metal = agent.queryInventory("metal");
 
 		var has_food = food >= 1;
@@ -37,7 +57,7 @@ class LogicBlacksmith extends LogicGeneric
 			{
 				makeRoomFor(market, agent,"food",2);
 			}
-		}
+		}*/
 	}
 
 }

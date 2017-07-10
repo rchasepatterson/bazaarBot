@@ -5,7 +5,7 @@ import bazaarbot.Market;
  * ...
  * @author larsiusprime
  */
-class LogicWoodcutter extends LogicGeneric
+class LogicMegahospital extends LogicGeneric
 {
 
 	public function new(?data:Dynamic)
@@ -15,7 +15,21 @@ class LogicWoodcutter extends LogicGeneric
 
 	override public function perform(agent:BasicAgent, market:Market)
 	{
-		var food = agent.queryInventory("food");
+		var insurance = agent.queryInventory("insurance");
+		var healthl = agent.queryInventory("healthl");
+		var money = agent.queryInventory("money");
+
+		if (money >= 150)
+		{
+			_consume(agent, "money", 20);
+			_produce(agent, "healthl", 5);
+		}
+		else
+		{
+			_consume(agent, "money", 20);
+			_produce(agent, "healthl", 4);
+		}
+		/*var food = agent.queryInventory("food");
 		var tools = agent.queryInventory("tools");
 
 		var has_food = food >= 1;
@@ -25,15 +39,15 @@ class LogicWoodcutter extends LogicGeneric
 		{
 			if (has_tools)
 			{
-				//produce 2 wood, consume 1 food, break tools with 10% chance
-				_produce(agent,"wood",2);
+				//produce 4 ore, consume 1 food, break tools with 10% chance
+				_produce(agent,"ore",4);
 				_consume(agent,"food",1);
 				_consume(agent,"tools",1,0.1);
 			}
 			else
 			{
-				//produce 1 wood, consume 1 food
-				_produce(agent,"wood",1);
+				//produce 2 ore, consume 1 food
+				_produce(agent,"ore",2);
 				_consume(agent,"food",1);
 			}
 		}
@@ -43,8 +57,8 @@ class LogicWoodcutter extends LogicGeneric
 			_consume(agent,"money",2);
 			if (!has_food && agent.inventoryFull)
 			{
-				makeRoomFor(market, agent, "food",2);
+				makeRoomFor(market, agent,"food",2);
 			}
-		}
+		}*/
 	}
 }
