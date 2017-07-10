@@ -57,6 +57,11 @@ class Market
 		return _agents.length;
 	}
 
+	public function roundNum():Int
+	{
+		return _roundNum;
+	}
+
 	public function replaceAgent(oldAgent:BasicAgent, newAgent:BasicAgent):Void
 	{
 		newAgent.id = oldAgent.id;
