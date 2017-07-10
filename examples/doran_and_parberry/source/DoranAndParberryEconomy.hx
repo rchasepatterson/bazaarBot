@@ -92,36 +92,6 @@ class DoranAndParberryEconomy extends Economy
 		  else "";
 	}
 
-	/**
-	 * Find the agent class that has the most of a given good
-	 * @param	good
-	 * @return
-	 */
-	/*
-	public function getAgentClassWithMost(good:String):String
-	{
-		var amount:Float = 0;
-		var bestAmount:Float = 0;
-		var bestClass:String = "";
-		for (key in _mapAgents.keys())
-		{
-			amount = getAverageInventory(key, good);
-			if (amount > bestAmount)
-			{
-				bestAmount = amount;
-				bestClass = key;
-			}
-		}
-		return bestClass;
-	}
-	*/
-
-	private function getAgentScript(data:AgentData):BasicAgent
-	{
-		data.logic = new LogicScript(data.logicName+".hs");
-		return new Agent(0, data);
-	}
-
 	private function getAgent(data:AgentData):BasicAgent
 	{
 		data.logic = getLogic(data.logicName);
