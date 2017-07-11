@@ -31,7 +31,10 @@ class DoranAndParberryEconomy extends Economy
 
 	override function onBankruptcy(m:Market, a:BasicAgent):Void
 	{
-		replaceAgent(m, a);
+		// Replace agents with another exactly like them
+		var newAgent = getAgent(m.getAgentClass(a.className));
+		m.replaceAgent(a, newAgent);
+		//replaceAgent(m, a);
 	}
 
 	private function replaceAgent(market:Market, agent:BasicAgent):Void
