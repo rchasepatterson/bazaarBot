@@ -23,6 +23,8 @@ class LogicConsumer extends LogicGeneric
 
 		var has_insurance = insurance >= 1;
 
+		//_produce(agent,"money",2);
+
 		if (sickness >= 3)
 		{
 			if (healthm >= 1)
