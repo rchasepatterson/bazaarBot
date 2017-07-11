@@ -25,7 +25,7 @@ class LogicConsumer extends LogicGeneric
 
 		//_produce(agent,"money",2);
 
-		if (sickness >= 3)
+		if (sickness >= 6)
 		{
 			if (healthm >= 1)
 			{
@@ -34,7 +34,7 @@ class LogicConsumer extends LogicGeneric
 				_consume(agent, "sickness", 1, 0.93);
 			}
 		}
-		else if (sickness >= 2 && has_insurance)
+		else if (sickness >= 3 && has_insurance)
 		{
 			if (healthl >= 1)
 			{
@@ -52,7 +52,12 @@ class LogicConsumer extends LogicGeneric
 		}
 		else
 		{
-			_produce(agent, "sickness", 1, 0);
+			// Chance to get sick
+			_produce(agent, "sickness", 1, 0.1);
+			// Chance to get /more sick/
+			_produce(agent, "sickness", 2, 0.01);
+			// Chance to get /very/ sick
+			_produce(agent, "sickness", 8, 0.005);
 		}
 
 

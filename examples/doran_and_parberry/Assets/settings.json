@@ -1,7 +1,7 @@
 {
 	"start_conditions":{
 		"agents":{
-			"consumer":2000,
+			"consumer":200,
 			"megahospital":5,
 			"clinic":10,
 			"privatehospital":7,
@@ -9,7 +9,7 @@
 		}
 	},
 	"goods":[
-		{"id":"sickness" ,"size":"2.0"},
+		{"id":"sickness" ,"size":"1.0"},
 		{"id":"insurance" ,"size":"1.0"},
 		{"id":"healths"  ,"size":"1.0"},
 		{"id":"healthm","size":"1.0"},
