@@ -70,6 +70,39 @@ class Market
 		newAgent.init(this);
 	}
 
+	public function addAgent(newAgent:BasicAgent):Void
+	{
+		newAgent.id = _agents.length;
+		newAgent.init(this);
+		_agents.push(newAgent);
+	}
+
+	public function removeAgent(className:String, quantity:Int = 1):Void
+	{
+
+		//Make the agent list
+		var newAgents = [];
+
+		var agentIndex = 0;
+		for (agent in _agents)
+		{
+			// Do we keep this?
+			if(agent.className == className && quantity > 0)
+			{
+				// No, we skip this one
+				quantity--;
+			}
+			else
+			{
+				agent.id = agentIndex;
+				newAgents.push(agent);
+				agentIndex++;
+			}
+		}
+
+		_agents = newAgents;
+	}
+
 	@:access(bazaarbot.agent.BasicAgent)
 	public function simulate(rounds:Int):Void
 	{

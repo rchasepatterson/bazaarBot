@@ -16,12 +16,15 @@ import flash.text.TextFormatAlign;
 
 class Main extends Sprite
 {
-	private var economy:Economy;
+	private var economy:DoranAndParberryEconomy;
 	private var market:Market;
 
 	private var display:MarketDisplay;
 	private var txt_benchmark:TextField;
 	private var txt_rounds:TextField;
+	private var txt_agent:TextField;
+
+	private var agentType:String = "consumer";
 
 	public function new()
 	{
@@ -40,8 +43,22 @@ class Main extends Sprite
 	private function makeButtons():Void
 	{
 		makeButton(10, 10, "Advance", onAdvance);
-		makeButton(10, 50, "Reset", onReset);
 		makeButton(120, 10, "Benchmark", onBenchmark);
+
+		makeButton(10, 50, "Reset", onReset);
+
+		// agent select
+		makeButton(120, 50, "<<", prevAgent, 50, 30);
+		makeButton(120 + 10 + 50, 50, ">>", nextAgent, 50, 30);
+
+		// agent quantity adjust
+		makeButton(800 - 10 - 50    , 50, "+100", onPlusHundred, 50, 30);
+		makeButton(800 - 10*2 - 50*2, 50, "+10", onPlusTen, 50, 30);
+		makeButton(800 - 10*3 - 50*3, 50, "+1", onPlusOne, 50, 30);
+		makeButton(800 - 10*4 - 50*4, 50, "0", onMurder, 50, 30);
+		makeButton(800 - 10*5 - 50*5, 50, "-1", onMinusOne, 50, 30);
+		makeButton(800 - 10*6 - 50*6, 50, "-10", onMinusTen, 50, 30);
+		makeButton(800 - 10*7 - 50*7, 50, "-100", onMinusHundred, 50, 30);
 
 		display = new MarketDisplay(799, 600 - 51);
 		display.x = 0;
@@ -52,13 +69,22 @@ class Main extends Sprite
 		txt_benchmark.x = 230;
 		txt_benchmark.y = 10;
 		txt_benchmark.width = 800 - 230;
+		txt_benchmark.height = 20;
 		addChild(txt_benchmark);
 
 		txt_rounds = new TextField();
 		txt_rounds.x = 800 - 70;
 		txt_rounds.y = 2;
 		txt_rounds.width = 70;
+		txt_rounds.height = 20;
 		addChild(txt_rounds);
+
+		txt_agent = new TextField();
+		txt_agent.x = 120 + 10*2 + 50*2;
+		txt_agent.y = 55;
+		txt_agent.width = 90;
+		txt_agent.height = 20;
+		addChild(txt_agent);
 	}
 
 	private function onBenchmark(m:MouseEvent):Void
@@ -98,6 +124,69 @@ class Main extends Sprite
 		updateDisplay();
 	}
 
+	private function onPlusHundred(m:MouseEvent):Void
+	{
+		for(i in 0 ... 100)
+		{
+			onPlusOne(m);
+		}
+	}
+
+	private function onPlusTen(m:MouseEvent):Void
+	{
+		for(i in 0 ... 10)
+		{
+			onPlusOne(m);
+		}
+	}
+
+	private function onPlusOne(m:MouseEvent):Void
+	{
+		var newAgent = economy.getAgent(market.getAgentClass(agentType));
+		market.addAgent(newAgent);
+		updateDisplay();
+	}
+
+	private function onMurder(m:MouseEvent):Void
+	{
+		market.removeAgent(agentType, 25565);
+		updateDisplay();
+	}
+
+	private function onMinusOne(m:MouseEvent):Void
+	{
+		market.removeAgent(agentType);
+		updateDisplay();
+	}
+
+	private function onMinusTen(m:MouseEvent):Void
+	{
+		market.removeAgent(agentType, 10);
+		updateDisplay();
+	}
+
+	private function onMinusHundred(m:MouseEvent):Void
+	{
+		market.removeAgent(agentType, 100);
+		updateDisplay();
+	}
+
+	private function nextAgent(m:MouseEvent):Void
+	{
+		var agentTypes = market.getAgentClassNames();
+
+		agentType = agentTypes[((agentTypes.indexOf(agentType) + 1) % agentTypes.length)];
+		updateDisplay();
+	}
+
+	private function prevAgent(m:MouseEvent):Void
+	{
+		var agentTypes = market.getAgentClassNames();
+
+		agentType = agentTypes[((agentTypes.indexOf(agentType) - 1) % agentTypes.length)];
+		updateDisplay();
+	}
+
 	private function setupEconomy():Void
 	{
 		economy = new DoranAndParberryEconomy();
@@ -107,6 +196,7 @@ class Main extends Sprite
 	private function updateDisplay():Void
 	{
 		display.update(market.get_marketReport(1));
+		txt_agent.text = agentType;
 		updateRoundNum();
 	}
 

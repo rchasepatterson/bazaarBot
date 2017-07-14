@@ -95,13 +95,13 @@ class DoranAndParberryEconomy extends Economy
 		  else "";
 	}
 
-	private function getAgent(data:AgentData):BasicAgent
+	public function getAgent(data:AgentData):BasicAgent
 	{
 		data.logic = getLogic(data.logicName);
 		return new Agent(0, data);
 	}
 
-	private function getLogic(str:String):Logic
+	public function getLogic(str:String):Logic
 	{
 		switch(str)
 		{
