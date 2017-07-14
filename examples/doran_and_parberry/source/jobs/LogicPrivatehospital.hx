@@ -27,7 +27,7 @@ class LogicPrivatehospital extends LogicGeneric
 		else
 		{
 			_consume(agent, "money", 15);
-			_produce(agent, "healths", 3);
+			_produce(agent, "healthm", 3);
 
 		}
 		/*var food = agent.queryInventory("food");
