@@ -212,7 +212,7 @@ class Main extends Sprite
 	{
 		var agentTypes = market.getAgentClassNames();
 
-		agentType = agentTypes[((agentTypes.indexOf(agentType) - 1) % agentTypes.length)];
+		agentType = agentTypes[((agentTypes.indexOf(agentType) + agentTypes.length + 1) % agentTypes.length)];
 		updateDisplay();
 	}
 
