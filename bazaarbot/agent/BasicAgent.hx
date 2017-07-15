@@ -71,6 +71,7 @@ class BasicAgent
 	public function init(market:Market):Void
 	{
 		var listGoods = market.getGoods_unsafe();
+		profit = 0;
 		for (str in listGoods)
 		{
 			var trades:Array<Float> = new Array<Float>();
