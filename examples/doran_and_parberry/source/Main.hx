@@ -23,6 +23,7 @@ class Main extends Sprite
 	private var txt_benchmark:TextField;
 	private var txt_rounds:TextField;
 	private var txt_agent:TextField;
+	private var txt_csv:TextField;
 
 	private var agentType:String = "consumer";
 
@@ -85,6 +86,14 @@ class Main extends Sprite
 		txt_agent.width = 90;
 		txt_agent.height = 20;
 		addChild(txt_agent);
+
+		txt_csv = new TextField();
+		txt_csv.x = 0;
+		txt_csv.y = 300;
+		txt_csv.width = 800;
+		txt_csv.height = 500;
+		addChild(txt_csv);
+		setupCsv();
 	}
 
 	private function onBenchmark(m:MouseEvent):Void
@@ -92,7 +101,7 @@ class Main extends Sprite
 		var time = Lib.getTimer();
 		var benchmark:Int = 10;
 		var roundNum = market.roundNum();
-		market.simulate(benchmark);
+		txt_csv.text += market.simulate(benchmark);
 		updateDisplay();
 		time = Lib.getTimer() - time;
 		var avg:Float = (cast(time, Float) / cast(benchmark, Float)) / 1000;
@@ -114,13 +123,14 @@ class Main extends Sprite
 
 	private function onAdvance(m:MouseEvent):Void
 	{
-		market.simulate(1);
+		txt_csv.text += market.simulate(1);
 		updateDisplay();
 	}
 
 	private function onReset(m:MouseEvent):Void
 	{
 		setupEconomy();
+		setupCsv();
 		updateDisplay();
 	}
 
@@ -191,6 +201,35 @@ class Main extends Sprite
 	{
 		economy = new DoranAndParberryEconomy();
 		market = economy.getMarket("default");
+	}
+
+	private function setupCsv():Void
+	{
+		txt_csv.text = "Round#";
+
+		// Goods
+		var goodTypes = market.getGoods();
+
+		for(type in goodTypes)
+		{
+			if(type != "sickness")
+			{
+				txt_csv.text += "," + type;
+			}
+		}
+
+		// Agents
+		var agentTypes = market.getAgentClassNames();
+
+		for(type in agentTypes)
+		{
+			if(type != "consumer")
+			{
+				txt_csv.text += "," + type;
+			}
+		}
+
+		txt_csv.text += "\n";
 	}
 
 	private function updateDisplay():Void

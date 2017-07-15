@@ -104,10 +104,14 @@ class Market
 	}
 
 	@:access(bazaarbot.agent.BasicAgent)
-	public function simulate(rounds:Int):Void
+	public function simulate(rounds:Int):String
 	{
+		var csv = "";
+
 		for (round in 0...rounds)
 		{
+			_roundNum++;
+			csv += _roundNum;
 			for (agent in _agents)
 			{
 				agent.moneyLastRound = agent.money;
@@ -122,7 +126,14 @@ class Market
 			for (commodity in _goodTypes)
 			{
 				resolveOffers(commodity);
+
+				if(commodity != "sickness")
+				{
+					var price:Float = history.prices.average(commodity, 1);
+					csv += "," + Quick.numStr(price, 2);
+				}
 			}
+
 			for (agent in _agents)
 			{
 				if (agent.money <= 0)
@@ -130,8 +141,19 @@ class Market
 					signalBankrupt.dispatch(this, agent);
 				}
 			}
-			_roundNum++;
+
+			for (key in _mapAgents.keys())
+			{
+				if(key != "consumer")
+				{
+					var profit:Float = history.profit.average(key, rounds);
+					csv += "," + Quick.numStr(profit, 2);
+				}
+			}
+			csv += "\n";
 		}
+
+		return csv;
 	}
 
 	public function ask(offer:Offer):Void
