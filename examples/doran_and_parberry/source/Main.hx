@@ -24,6 +24,7 @@ class Main extends Sprite
 	private var txt_rounds:TextField;
 	private var txt_agent:TextField;
 	private var txt_csv:TextField;
+	private var txt_csv_save:TextField;
 
 	private var agentType:String = "consumer";
 
@@ -94,6 +95,15 @@ class Main extends Sprite
 		txt_csv.height = 500;
 		addChild(txt_csv);
 		setupCsv();
+
+		makeButton(10, 300 - 40, "Save .csv", onSaveCsv);
+
+		txt_csv_save = new TextField();
+		txt_csv_save.x = 120;
+		txt_csv_save.y = 300 - 40 + 5;
+		txt_csv_save.width = 500;
+		txt_csv_save.height = 20;
+		addChild(txt_csv_save);
 	}
 
 	private function onBenchmark(m:MouseEvent):Void
@@ -179,6 +189,15 @@ class Main extends Sprite
 	{
 		market.removeAgent(agentType, 100);
 		updateDisplay();
+	}
+
+	private function onSaveCsv(m:MouseEvent):Void
+	{
+		#if cpp
+			txt_csv_save.text = "File saved to ...";
+		#else
+			txt_csv_save.text = "Saving to .csv not supported on this platform, use ctrl+a ctrl+c below";
+		#end
 	}
 
 	private function nextAgent(m:MouseEvent):Void
