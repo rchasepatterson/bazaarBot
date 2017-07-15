@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Doran & Parberry's example" package="com.leveluplabs.example" version="1.0.0" company="LevelUpLabs" />
+	<meta title="Healthcare market simulation" package="com.leveluplabs.example" version="1.0.0" company="LevelUpLabs" />
 	<app main="Main" path="Export" file="doran_and_parberry"/>
 	
 	<source path="Source" />
