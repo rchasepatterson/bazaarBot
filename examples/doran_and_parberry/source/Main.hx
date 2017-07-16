@@ -13,6 +13,7 @@ import openfl.Assets;
 import flash.events.MouseEvent;
 import flash.text.TextFormatAlign;
 import sys.io.File;
+import sys.io.FileSystem;
 import sys.io.FileOutput;
 
 
@@ -201,7 +202,7 @@ class Main extends Sprite
 			fout.writeString(txt_csv.text);
 			fout.close();
 
-			txt_csv_save.text = "File saved to ...";
+			txt_csv_save.text = "File saved to " + FileSystem.absolutePath(fileName);
 		#else
 			txt_csv_save.text = "Saving to .csv not supported on this platform, use ctrl+a ctrl+c below";
 		#end
