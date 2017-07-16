@@ -12,6 +12,8 @@ import flash.display.Sprite;
 import openfl.Assets;
 import flash.events.MouseEvent;
 import flash.text.TextFormatAlign;
+import sys.io.File;
+import sys.io.FileOutput;
 
 
 class Main extends Sprite
@@ -194,6 +196,11 @@ class Main extends Sprite
 	private function onSaveCsv(m:MouseEvent):Void
 	{
 		#if cpp
+			var fileName:String = "econ_output.csv";
+			var fout = File.write(fileName, false);
+			fout.writeString(txt_csv.text);
+			fout.close();
+
 			txt_csv_save.text = "File saved to ...";
 		#else
 			txt_csv_save.text = "Saving to .csv not supported on this platform, use ctrl+a ctrl+c below";
