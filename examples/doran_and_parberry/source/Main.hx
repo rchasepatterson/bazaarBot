@@ -12,8 +12,8 @@ import flash.display.Sprite;
 import openfl.Assets;
 import flash.events.MouseEvent;
 import flash.text.TextFormatAlign;
+import sys.FileSystem;
 import sys.io.File;
-import sys.io.FileSystem;
 import sys.io.FileOutput;
 
 
@@ -104,7 +104,7 @@ class Main extends Sprite
 		txt_csv_save = new TextField();
 		txt_csv_save.x = 120;
 		txt_csv_save.y = 300 - 40 + 5;
-		txt_csv_save.width = 500;
+		txt_csv_save.width = 800;
 		txt_csv_save.height = 20;
 		addChild(txt_csv_save);
 	}
